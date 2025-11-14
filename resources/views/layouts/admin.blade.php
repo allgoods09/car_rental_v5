@@ -36,8 +36,8 @@
                    class="flex items-center px-6 py-3 text-gray-700 hover:bg-indigo-50 {{ Route::is('admin.bookings') ? 'bg-indigo-100' : 'border-transparent' }} hover:text-indigo-600 font-medium transition">
                     <i class="fa-solid fa-users w-5 mr-3 text-indigo-500"></i> Bookings
                 </a>
-                <a href=""
-                   class="flex items-center px-6 py-3 text-gray-700 hover:bg-indigo-50 {{ Route::is('') ? 'bg-indigo-100' : 'border-transparent' }} hover:text-indigo-600 font-medium transition">
+                <a href="{{ route('admin.transactions') }}"
+                   class="flex items-center px-6 py-3 text-gray-700 hover:bg-indigo-50 {{ Route::is('admin.transactions') ? 'bg-indigo-100' : 'border-transparent' }} hover:text-indigo-600 font-medium transition">
                     <i class="fa-solid fa-chart-line w-5 mr-3 text-indigo-500"></i> Transactions
                 </a>
                 <a href=""

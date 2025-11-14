@@ -11,7 +11,7 @@ class WelcomeController extends Controller
     {
         $addresses = Address::orderBy('name')->get();
 
-        return view('welcome', compact('addresses'));
+        return view('car-rental-welcome', compact('addresses'));
     }
 
     // public function preview(Request $request)

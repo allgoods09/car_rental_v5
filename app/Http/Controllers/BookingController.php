@@ -4,47 +4,53 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
 use App\Models\Car;
+use App\Models\Booking;
+use Carbon\Carbon;
 
 class BookingController extends Controller
 {
     public function startBooking(Request $request)
     {
+        session([
+            'pending_booking' => $request->only([
+                'address', 'age', 'pickup_date', 'pickup_time', 'return_date', 'return_time'
+            ])
+        ]);
+
         if (!Auth::check()) {
-    session([
-        'pending_booking' => $request->only([
-            'address', 'age', 'pickup_date', 'pickup_time', 'return_date', 'return_time'
-        ])
-    ]);
+            return redirect()->guest(route('login'))->with('message', 'Please log in to continue your booking.');
+        }
 
-    // 🟢 Use redirect()->guest() so Laravel remembers the "intended" URL
-    return redirect()->guest(route('login'))->with('message', 'Please log in to continue your booking.');
-}
+        return redirect()->route('booking.continue');
+    }
 
-        // Authenticated users can proceed normally
-        return redirect()->route('booking.continue')->withInput();
+    public function continueBooking(Request $request)
+    {
+        $form = session('_old_input', []);
+
+        if (empty($form)) {
+            return redirect()->route('home')->with('error', 'Please start a booking first.');
+        }
+
+        return view('booking-process', ['form' => $form]);
     }
 
     public function finalStep(Request $request, Car $car)
     {
-        // Retrieve booking details from session
         $form = session('pending_booking');
 
         if (!$form) {
             return redirect()->route('home')->with('error', 'Please start a booking first.');
         }
 
-        // Calculate duration and amount
         $pickup = Carbon::parse($form['pickup_date'] . ' ' . $form['pickup_time']);
         $return = Carbon::parse($form['return_date'] . ' ' . $form['return_time']);
         $durationHours = $pickup->diffInHours($return);
-
-        // Convert to days (if exceeds 24 hrs or has remainder, add 1)
         $rentalDays = ceil($durationHours / 24);
 
         $carSubtotal = $car->daily_rate * $rentalDays;
-        $extrasSubtotal = 0; // You can modify this if extras exist
+        $extrasSubtotal = 0;
         $totalAmount = $carSubtotal + $extrasSubtotal;
 
         return view('booking-final', [
@@ -84,7 +90,6 @@ class BookingController extends Controller
             'status' => 'pending',
         ]);
 
-        // Clear session
         session()->forget('pending_booking');
 
         return redirect()->route('home')->with('success', 'Booking submitted successfully! Await confirmation.');

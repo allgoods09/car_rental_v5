@@ -3,7 +3,7 @@
 @section('title', 'Continue Booking')
 
 @section('content')
-<div class="max-w-4xl mx-auto bg-gray-900 text-white rounded-2xl shadow-lg p-8 mt-10 border border-gray-700">
+{{-- <div class="max-w-4xl mx-auto bg-gray-900 text-white rounded-2xl shadow-lg p-8 mt-10 border border-gray-700">
     <h2 class="text-3xl font-bold mb-6 text-center text-yellow-400">Booking Summary</h2>
 
     <!-- Booking Details -->
@@ -53,6 +53,54 @@
             </button>
         </form>
         <a href="{{ route('home') }}" class="mt-4 inline-block text-gray-400 hover:text-white text-sm">Cancel and go back</a>
+    </div>
+</div> --}}
+<div class="max-w-4xl mx-auto bg-gray-900 text-white rounded-2xl shadow-lg p-8 mt-10 border border-gray-700">
+    <h2 class="text-3xl font-bold mb-6 text-center text-yellow-400">Booking Summary</h2>
+
+    <!-- Booking Details -->
+    <div class="bg-gray-800 rounded-xl p-6 mb-6">
+        <h3 class="text-xl font-semibold mb-3 border-b border-gray-700 pb-2">Booking Details</h3>
+        <ul class="space-y-2 text-gray-300">
+            <li><strong>Address:</strong> Tagbilaran City, Bohol</li>
+            <li><strong>Driver Age:</strong> 26</li>
+            <li><strong>Pickup:</strong> 2025-10-30 at 09:00 AM</li>
+            <li><strong>Return:</strong> 2025-11-02 at 09:00 AM</li>
+            <li><strong>Rental Days:</strong> 3 day(s)</li>
+        </ul>
+    </div>
+
+    <!-- Car Details -->
+    <div class="bg-gray-800 rounded-xl p-6 mb-6">
+        <h3 class="text-xl font-semibold mb-3 border-b border-gray-700 pb-2">Selected Car</h3>
+        <div class="flex items-center gap-4">
+            <img src="https://images.pexels.com/photos/358070/pexels-photo-358070.jpeg?auto=compress&cs=tinysrgb&w=800" 
+                 alt="Toyota Vios" 
+                 class="w-40 h-28 rounded-lg object-cover">
+            <div>
+                <h4 class="text-lg font-bold text-yellow-400">Toyota Vios (2022)</h4>
+                <p class="text-sm text-gray-400">Sedan</p>
+                <p class="mt-1 text-sm text-gray-300">₱1,800.00 / day</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Breakdown -->
+    <div class="bg-gray-800 rounded-xl p-6 mb-6">
+        <h3 class="text-xl font-semibold mb-3 border-b border-gray-700 pb-2">Payment Breakdown</h3>
+        <ul class="space-y-2 text-gray-300">
+            <li class="flex justify-between"><span>Car Subtotal (3 days):</span> <span>₱5,400.00</span></li>
+            <li class="flex justify-between"><span>Extras:</span> <span>₱0.00</span></li>
+            <li class="flex justify-between text-yellow-400 font-semibold border-t border-gray-700 pt-2"><span>Total:</span> <span>₱5,400.00</span></li>
+        </ul>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="text-center">
+        <button class="px-6 py-3 bg-yellow-500 hover:bg-yellow-600 text-black font-bold rounded-lg shadow-md transition-all">
+            Book Now!
+        </button>
+        <a href="#" class="mt-4 inline-block text-gray-400 hover:text-white text-sm">Cancel and go back</a>
     </div>
 </div>
 

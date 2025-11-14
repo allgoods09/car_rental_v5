@@ -4,23 +4,71 @@
 
 @section('content')
 
-    <section id="home" class="flex flex-col items-center justify-center text-center px-6 py-20 bg-[url('')]">
-        <h2 class="text-4xl md:text-6xl font-bold mb-4">Laag Na, Bisan Asa.</h2>
-        <p class="text-lg text-gray-600 max-w-xl mb-8">
+    {{-- <section 
+        id="home" 
+        class="min-h-[calc(100vh-80px)] flex flex-col items-center justify-center text-center px-6"
+    >
+        <h2 class="text-4xl md:text-6xl font-bold mb-4 text-gray-200">Laag Na, Bisan Asa.</h2>
+
+        <p class="text-lg text-white max-w-xl mb-8">
             Experience hassle-free car rentals with affordable rates, flexible booking, and top-quality vehicles.
         </p>
 
-        {{-- <div class="flex gap-4">
-            <a href="{{ route('login') }}" class="px-6 py-3 bg-indigo-600 text-white rounded-md text-lg font-semibold hover:bg-indigo-700 transition">
+        <div class="flex gap-4">
+            <a href="{{ route('login') }}"
+               class="px-6 py-3 bg-indigo-600 text-white rounded-md text-lg font-semibold hover:bg-indigo-700 transition">
                 Rent a Car
             </a>
-            <a href="{{ route('register') }}" class="px-6 py-3 border border-indigo-600 text-indigo-600 rounded-md text-lg font-semibold hover:bg-indigo-50 transition">
+
+            <a href="{{ route('register') }}"
+               class="px-6 py-3 border border-indigo-600 text-white hover:text-indigo-900 rounded-md text-lg font-semibold hover:bg-indigo-50 transition">
                 Become a Member
             </a>
-        </div> --}}
+        </div>
+    </section> --}}
+
+    <section 
+        id="home" 
+        class="min-h-[calc(100vh-80px)] flex flex-col items-center justify-center text-center px-6"
+    >
+        <h2 class="text-4xl md:text-6xl font-bold mb-4 text-gray-200">Laag Na, Bisan Asa.</h2>
+
+        <p class="text-lg text-white max-w-xl mb-8">
+            Experience hassle-free car rentals with affordable rates, flexible booking, and top-quality vehicles.
+        </p>
+
+        {{-- The container class changes based on authentication status --}}
+        <div class="flex {{ Auth::check() ? 'justify-center' : 'gap-4' }}">
+
+            {{-- RENT A CAR BUTTON LOGIC --}}
+            <a 
+                @auth
+                    {{-- If logged in, direct to the booking page directly --}}
+                    href="{{ route('main.booking') }}"
+                    {{-- Use a wider class when the other button is hidden --}}
+                    class="w-60 py-3 bg-indigo-600 text-white rounded-md text-lg font-semibold hover:bg-indigo-700 transition"
+                @else
+                    {{-- If not logged in, direct to the login page.
+                        We pass the intended booking route so Laravel redirects them there immediately after successful login. --}}
+                    href="{{ route('login', ['intended' => route('main.booking', [], false)]) }}"
+                    {{-- Use original padding when both buttons are visible --}}
+                    class="px-6 py-3 bg-indigo-600 text-white rounded-md text-lg font-semibold hover:bg-indigo-700 transition"
+                @endauth
+            >
+                Rent a Car
+            </a>
+
+            {{-- BECOME A MEMBER BUTTON (Only visible for guests) --}}
+            @guest
+                <a href="{{ route('register') }}"
+                class="px-6 py-3 border border-indigo-600 text-white hover:text-indigo-900 rounded-md text-lg font-semibold hover:bg-indigo-50 transition">
+                    Become a Member
+                </a>
+            @endguest
+        </div>
     </section>
 
-    <form 
+    {{-- <form 
     action="{{ route('booking.continue') }}" 
     method="GET" 
     class="max-w-5xl mx-auto bg-white p-10 rounded-2xl shadow-lg border border-gray-200 space-y-8"
@@ -29,7 +77,7 @@
 
     <h3 class="text-3xl font-bold text-gray-800 text-center mb-6">Start Your Booking</h3>
 
-    <!-- Form Row 1: Address -->
+    
     <div class="flex flex-col sm:flex-row items-start gap-6">
         <div class="flex-1 relative w-full">
             <label for="address" class="text-gray-700 font-medium mb-2 block">Pick-up Address</label>
@@ -43,7 +91,7 @@
                 oninput="showSuggestions(this.value)"
                 required
             >
-            <!-- Dropdown Suggestions -->
+            
             <ul id="addressSuggestions"
                 class="absolute left-0 right-0 bg-white border border-gray-300 rounded-lg mt-1 w-full max-h-48 overflow-y-auto shadow-xl hidden z-50">
                 @foreach ($addresses as $address)
@@ -70,7 +118,7 @@
         </div>
     </div>
 
-    <!-- Form Row 2: Pickup -->
+   
     <div class="flex flex-col sm:flex-row items-start gap-6">
         <div class="flex-1">
             <label for="pickup_date" class="text-gray-700 font-medium mb-2 block">Pick-up Date</label>
@@ -104,7 +152,7 @@
         </div>
     </div>
 
-    <!-- Form Row 3: Return -->
+  
     <div class="flex flex-col sm:flex-row items-start gap-6">
         <div class="flex-1">
             <label for="return_date" class="text-gray-700 font-medium mb-2 block">Return Date</label>
@@ -138,7 +186,7 @@
         </div>
     </div>
 
-    <!-- Submit Button -->
+
     <div class="flex justify-center pt-4">
         <button 
             type="submit" 
@@ -148,7 +196,7 @@
         </button>
     </div>
 
-    <!-- JS for Address Suggestions & Date Logic -->
+
     <script>
         const allAddresses = @json($addresses->pluck('name'));
         const suggestionsBox = document.getElementById('addressSuggestions');
@@ -191,20 +239,21 @@
             }
         });
 
-        // Default date to today, disable past dates
+
         const today = new Date().toISOString().split('T')[0];
         document.getElementById('pickup_date').setAttribute('min', today);
         document.getElementById('return_date').setAttribute('min', today);
         document.getElementById('pickup_date').value = today;
         document.getElementById('return_date').value = today;
 
-        // Default time to 8:00 AM
+ 
         document.getElementById('pickup_time').value = "08:00";
+        document.getElementById('return_time').value = "08:00";
     </script>
 </form>
 
 
-    <!-- Available Cars Section -->
+
     <section class="max-w-7xl mx-auto mt-16 px-6">
         <h3 class="text-3xl font-bold text-gray-800 mb-8 text-center">Available Cars</h3>
 
@@ -214,7 +263,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 @foreach ($cars as $car)
                     <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition transform hover:-translate-y-1">
-                        {{-- Car image (if you have attachments) --}}
+                 
                         @if($car->attachments->isNotEmpty())
                             <img src="{{ asset('storage/' . $car->attachments->first()->path) }}" 
                                 alt="{{ $car->make }} {{ $car->model }}"
@@ -238,20 +287,12 @@
                                 Rating: ⭐ {{ $car->average_rating ?? 'No reviews yet' }}
                             </p>
 
-                            {{-- <div class="flex items-center justify-between mt-3">
-                                <span class="text-indigo-600 font-bold text-lg">
-                                    ₱{{ number_format($car->price_per_day, 2) }}/day
-                                </span>
-                                <a href="{{ route('booking.continue', ['car_id' => $car->id]) }}"
-                                class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition">
-                                    Book Now
-                                </a>
-                            </div> --}}
+                            
                         </div>
                     </div>
                 @endforeach
             </div>
         @endif
-    </section>
+    </section> --}}
 
 @endsection

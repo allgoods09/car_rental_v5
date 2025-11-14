@@ -13,5 +13,7 @@ class Addresses extends Model
         'name',
         'city',
         'region',
+        'province', 
+        'barangay', 
     ];
 }

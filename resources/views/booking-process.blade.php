@@ -3,7 +3,7 @@
 @section('title', 'Booking Process')
 
 @section('content')
-<div class="max-w-5xl mx-auto bg-white shadow-xl rounded-2xl p-10 mt-10 border border-gray-200">
+<div class="max-w-5xl mx-auto bg-white shadow-xl rounded-2xl pt-10 p-10 mt-3 border border-gray-200">
     <!-- Header -->
     <div class="mb-8 border-b pb-4">
         <h2 class="text-3xl font-bold text-gray-800">
@@ -56,7 +56,10 @@
     </h2>
 
     @php
-        $availableCars = \App\Models\Car::where('status', 'available')->get();
+        $availableCars = \App\Models\Car::where('status', 'available')
+        ->with('attachments')
+        ->get();
+
     @endphp
 
     @if($availableCars->isEmpty())
@@ -70,7 +73,16 @@
                 <div class="bg-white border border-gray-200 rounded-2xl shadow hover:shadow-lg transition duration-300 overflow-hidden">
                     <!-- Image Placeholder -->
                     <div class="h-44 bg-gray-100 flex items-center justify-center">
-                        <i class="fa-solid fa-car-side text-gray-400 text-5xl"></i>
+                        @php
+                            // Try to get main attachment first, otherwise get first attachment
+                            $attachment = $car->attachments->where('is_main', true)->first() ?? $car->attachments->first();
+                        @endphp
+
+                        @if($attachment)
+                            <img src="{{ asset('storage/' . $attachment->url) }}" alt="{{ $car->model }}" class="h-full w-full object-cover">
+                        @else
+                            <i class="fa-solid fa-car text-gray-400 text-6xl"></i>
+                        @endif
                     </div>
 
                     <div class="p-6 space-y-2">

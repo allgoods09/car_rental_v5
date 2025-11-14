@@ -3,15 +3,15 @@
 @section('title', 'Register')
 
 @section('content')
-<div class="min-h-screen flex items-center justify-center bg-gray-100 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-md w-full space-y-8 bg-white p-8 rounded-xl shadow-lg">
+<div class="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md w-full space-y-8 bg-indigo-900 p-8 rounded-xl shadow-lg">
         
         <!-- Header -->
         <div class="text-center">
-            <h2 class="text-3xl font-bold text-black">
+            <h2 class="text-3xl font-bold text-gray-100">
                 Create an account
             </h2>
-            <p class="mt-2 text-sm text-black">
+            <p class="mt-2 text-sm text-gray-100">
                 Enter your details below to create your account
             </p>
         </div>
@@ -24,7 +24,7 @@
 
             <!-- Name -->
             <div>
-                <label for="name" class="block text-sm font-medium text-black">{{ __('Name') }}</label>
+                <label for="name" class="block text-sm font-medium text-gray-100">{{ __('Name') }}</label>
                 <input
                     id="name"
                     name="name"
@@ -39,7 +39,7 @@
 
             <!-- Email Address -->
             <div>
-                <label for="email" class="block text-sm font-medium text-black">{{ __('Email address') }}</label>
+                <label for="email" class="block text-sm font-medium text-gray-100">{{ __('Email address') }}</label>
                 <input
                     id="email"
                     name="email"
@@ -53,7 +53,7 @@
 
             <!-- Password -->
             <div>
-                <label for="password" class="block text-sm font-medium text-black">{{ __('Password') }}</label>
+                <label for="password" class="block text-sm font-medium text-gray-100">{{ __('Password') }}</label>
                 <input
                     id="password"
                     name="password"
@@ -67,7 +67,7 @@
 
             <!-- Confirm Password -->
             <div>
-                <label for="password_confirmation" class="block text-sm font-medium text-black">{{ __('Confirm password') }}</label>
+                <label for="password_confirmation" class="block text-sm font-medium text-gray-100">{{ __('Confirm password') }}</label>
                 <input
                     id="password_confirmation"
                     name="password_confirmation"
@@ -91,9 +91,9 @@
         </form>
 
         <!-- Already have account -->
-        <p class="mt-6 text-center text-sm text-gray-600 dark:text-gray-400">
+        <p class="mt-6 text-center text-sm text-gray-100">
             {{ __('Already have an account?') }}
-            <a href="{{ route('login') }}" class="font-medium text-indigo-600 hover:text-indigo-500">
+            <a href="{{ route('login') }}" class="font-medium text-indigo-100 hover:text-blue-400">
                 {{ __('Log in') }}
             </a>
         </p>

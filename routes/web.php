@@ -14,9 +14,14 @@ use App\Livewire\Admin\Dashboard;
 use App\Livewire\Admin\Users;
 use App\Livewire\Admin\Bookings;
 use App\Livewire\Admin\Statistics;
+use App\Livewire\Admin\Transactions;
+use App\Livewire\Admin\Drivers;
 use App\Livewire\Admin\Cars;
 use App\Livewire\Customer\Bookings as CustomerBookings;
 use App\Http\Controllers\BookingController;
+use App\Livewire\Mainflow\Booking as MainBooking;
+use App\Livewire\Welcome;
+
 
 
 Route::get('/', [CarController::class, 'index'])->name('home');
@@ -33,9 +38,9 @@ Route::post('logout', [LoginController::class, 'logout'])->name('logout');
      Route::get('/booking/final/{car}', [BookingController::class, 'finalStep'])->name('booking.final');  // Uses route model binding for Car
      Route::post('/booking/confirm', [BookingController::class, 'confirmBooking'])->name('booking.confirm');
 
-Route::get('/home', [WelcomeController::class, 'index'])
-    ->middleware('auth')
-    ->name('home');
+// Route::get('/home', [WelcomeController::class, 'index'])
+//     ->middleware('auth')
+//     ->name('home');
 
 Route::get('manage/bookings', CustomerBookings::class)
     ->middleware('auth')
@@ -44,6 +49,8 @@ Route::get('manage/bookings', CustomerBookings::class)
 Route::view('contact', 'contact')->name('contact');
 
 Route::view('about', 'about')->name('about');
+
+
 
 // Route::view('dashboard', 'dashboard')
 //     ->middleware(['auth', 'verified'])
@@ -74,6 +81,15 @@ Route::get('admin/bookings', function () {
 
     return redirect('/')->with('error', 'Unauthorized access.');
 })->name('admin.bookings');
+
+Route::get('admin/transactions', function () {
+    if (Auth::check() && Auth::user()->role === 'admin') {
+        return view('admin.transaction-page');
+    }
+
+    return redirect('/')->with('error', 'Unauthorized access.');
+})->name('admin.transactions');
+
 
 Route::middleware(['auth'])->group(function () {
     Route::redirect('settings', 'settings/profile');
@@ -110,3 +126,15 @@ Route::get('/booking/continue', function (Illuminate\Http\Request $request) {
         'form' => $request->all(),
     ]);
 })->name('booking.continue');
+
+
+Route::view('booking/final', 'tempblade')->name('booking.temp');
+Route::view('booking/confirmation', 'tempblade2')->name('booking.confirmation');
+
+Route::view('manage/bookings', 'managestatic')->name('manage.bookings');
+
+// Route::get('main/booking', MainBooking::class)->name('main.booking');
+
+Route::view('main/booking', 'main-booking-holder')->name('main.booking');
+
+// Route::get('home', Welcome::class)->name('home');

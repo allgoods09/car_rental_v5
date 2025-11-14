@@ -3,14 +3,14 @@
 @section('title', 'Login')
 
 @section('content')
-<div class="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-md w-full space-y-8 bg-white dark:bg-white p-8 rounded-xl shadow-lg">
+<div class="min-h-screen flex items-center justify-center  py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md w-full space-y-8 bg-indigo-900 p-8 rounded-xl shadow-lg">
         
         <div class="text-center">
-            <h2 class="text-3xl font-bold text-black">
+            <h2 class="text-3xl font-bold text-gray-100">
                 Log in to your account
             </h2>
-            <p class="mt-2 text-sm text-black">
+            <p class="mt-2 text-sm text-gray-100">
                 Enter your email and password below to log in
             </p>
         </div>
@@ -23,7 +23,7 @@
 
             <!-- Email Address -->
             <div>
-                <label for="email" class="block text-sm font-medium text-black">{{ __('Email address') }}</label>
+                <label for="email" class="block text-sm font-medium text-gray-100">{{ __('Email address') }}</label>
                 <input
                     id="email"
                     name="email"
@@ -38,7 +38,7 @@
 
             <!-- Password -->
             <div class="relative">
-                <label for="password" class="block text-sm font-medium text-black">{{ __('Password') }}</label>
+                <label for="password" class="block text-sm font-medium text-gray-100">{{ __('Password') }}</label>
                 <input
                     id="password"
                     name="password"
@@ -49,7 +49,7 @@
                     class="mt-1 block w-full px-4 py-3 border border-gray-900 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 bg-gray-200 text-black"
                 />
                 @if (Route::has('password.request'))
-                    <a href="{{ route('password.request') }}" class="absolute right-0 top-1 text-sm text-indigo-600 hover:underline">
+                    <a href="{{ route('password.request') }}" class="absolute right-0 top-1 text-sm text-indigo-100 hover:underline">
                         {{ __('Forgot your password?') }}
                     </a>
                 @endif
@@ -64,7 +64,7 @@
                     class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
                     {{ old('remember') ? 'checked' : '' }}
                 />
-                <label for="remember" class="ml-2 block text-sm text-black">
+                <label for="remember" class="ml-2 block text-sm text-gray-100">
                     {{ __('Remember me') }}
                 </label>
             </div>
@@ -82,9 +82,9 @@
         </form>
 
         @if (Route::has('register'))
-            <p class="mt-6 text-center text-sm text-gray-600 dark:text-gray-400">
+            <p class="mt-6 text-center text-sm text-gray-100">
                 {{ __('Don\'t have an account?') }}
-                <a href="{{ route('register') }}" class="font-medium text-indigo-600 hover:text-indigo-500">
+                <a href="{{ route('register') }}" class="font-medium text-indigo-100 hover:text-blue-400">
                     {{ __('Sign up') }}
                 </a>
             </p>
