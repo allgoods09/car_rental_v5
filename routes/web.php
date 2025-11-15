@@ -42,9 +42,9 @@ Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 //     ->middleware('auth')
 //     ->name('home');
 
-Route::get('manage/bookings', CustomerBookings::class)
-    ->middleware('auth')
-    ->name('customer.bookings');
+// Route::get('manage/bookings', CustomerBookings::class)
+//     ->middleware('auth')
+//     ->name('customer.bookings');
 
 Route::view('contact', 'contact')->name('contact');
 
@@ -90,6 +90,30 @@ Route::get('admin/transactions', function () {
     return redirect('/')->with('error', 'Unauthorized access.');
 })->name('admin.transactions');
 
+Route::get('admin/drivers', function () {
+    if (Auth::check() && Auth::user()->role === 'admin') {
+        return view('livewire.admin.drivers'); // or return your Livewire component
+    }
+
+    return redirect('/')->with('error', 'Unauthorized access.');
+})->name('admin.drivers');
+
+Route::get('admin/users', function () {
+    if (Auth::check() && Auth::user()->role === 'admin') {
+        return view('livewire.admin.users'); // or return your Livewire component
+    }
+
+    return redirect('/')->with('error', 'Unauthorized access.');
+})->name('admin.users');
+
+Route::get('admin/cars', function () {
+    if (Auth::check() && Auth::user()->role === 'admin') {
+        return view('livewire.admin.cars'); // or return your Livewire component
+    }
+
+    return redirect('/')->with('error', 'Unauthorized access.');
+})->name('admin.cars');
+
 
 Route::middleware(['auth'])->group(function () {
     Route::redirect('settings', 'settings/profile');
@@ -131,7 +155,7 @@ Route::get('/booking/continue', function (Illuminate\Http\Request $request) {
 Route::view('booking/final', 'tempblade')->name('booking.temp');
 Route::view('booking/confirmation', 'tempblade2')->name('booking.confirmation');
 
-Route::view('manage/bookings', 'managestatic')->name('manage.bookings');
+// Route::view('manage/bookings', 'managestatic')->name('manage.bookings');
 
 // Route::get('main/booking', MainBooking::class)->name('main.booking');
 
@@ -140,5 +164,11 @@ Route::view('main/booking', 'main-booking-holder')->name('main.booking');
 Route::view('main/booking/final', 'main-booking-holder-final')->name('final.booking');
 
 Route::view('main/booking/final/confirmation', 'main-booking-holder-final-confirm')->name('booking.confirm');
+
+Route::view('manage/bookings', 'manage-bookings')->name('manage.booking');
+
+Route::view('main/settings', 'settings')->name('main.settings');
+
+Route::view('admin/settings', 'admin.settings')->name('admin.settings');
 
 // Route::get('home', Welcome::class)->name('home');

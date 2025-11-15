@@ -16,6 +16,8 @@
         $timeDisplay = date('g:i A', strtotime("$i:00"));
         $times[] = ['value' => $timeValue, 'display' => $timeDisplay];
     }
+
+    
 @endphp
 
 <div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -32,7 +34,7 @@
             </p>
         </div>
 
-        <form action="" method="POST" class="mt-8 space-y-6">
+        <form action="{{ route('final.booking') }}" method="GET" class="mt-8 space-y-6">
             {{-- Note: action is intentionally left empty as requested --}}
             
             <!-- 1. Address -->
@@ -129,12 +131,11 @@
 
             <!-- 5. Submit Button -->
             <div class="pt-2">
-                <a  
-                    href="{{ route('final.booking') }}"
-                    class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-lg font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 shadow-lg transition"
+                <button type="submit"
+                    class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-lg font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none shadow-lg transition"
                 >
                     Book for a car
-                </a>
+                </button>
             </div>
         </form>
     </div>
