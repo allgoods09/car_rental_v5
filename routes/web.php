@@ -36,7 +36,7 @@ Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
  Route::get('/booking/continue', [BookingController::class, 'continueBooking'])->name('booking.continue');
      Route::get('/booking/final/{car}', [BookingController::class, 'finalStep'])->name('booking.final');  // Uses route model binding for Car
-     Route::post('/booking/confirm', [BookingController::class, 'confirmBooking'])->name('booking.confirm');
+    //  Route::post('/booking/confirm', [BookingController::class, 'confirmBooking'])->name('booking.confirm');
 
 // Route::get('/home', [WelcomeController::class, 'index'])
 //     ->middleware('auth')
@@ -136,5 +136,9 @@ Route::view('manage/bookings', 'managestatic')->name('manage.bookings');
 // Route::get('main/booking', MainBooking::class)->name('main.booking');
 
 Route::view('main/booking', 'main-booking-holder')->name('main.booking');
+
+Route::view('main/booking/final', 'main-booking-holder-final')->name('final.booking');
+
+Route::view('main/booking/final/confirmation', 'main-booking-holder-final-confirm')->name('booking.confirm');
 
 // Route::get('home', Welcome::class)->name('home');

@@ -13,7 +13,7 @@
             <!-- Right Content -->
             <div class="w-full lg:w-1/2 text-center lg:text-left">
                 <h3 class="text-4xl font-bold text-gray-100 mb-6">About <span class="text-indigo-600">4A Car Rental</span></h3>
-                <p class="text-gray-200 leading-relaxed mb-6">
+                <p class="text-gray-200 leading-relaxed mb-6 font-bold">
                     At 4A Car Rental, we believe every trip should start with a smooth ride. Our goal is to provide
                     convenient, reliable, and affordable car rental services across the Philippines.
                     Whether you’re exploring the city, traveling for business, or going on a weekend getaway,
